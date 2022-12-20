@@ -112,7 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\teenik\Desktop\Programming\CPP\VerletInterpolation\VerletInterpolation\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\teenik\Desktop\Programming\CPP\VerletInterpolation\VerletInterpolation\SFML-2.5.1\include;C:\Users\teenik\Desktop\Programming\CPP\VerletInterpolation_SFML\VerletInterpolation\Header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,7 +129,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\teenik\Desktop\Programming\CPP\VerletInterpolation\VerletInterpolation\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\teenik\Desktop\Programming\CPP\VerletInterpolation\VerletInterpolation\SFML-2.5.1\include;C:\Users\teenik\Desktop\Programming\CPP\VerletInterpolation_SFML\VerletInterpolation\Header;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,6 +142,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Source\Objects\CircleObject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Header\Objects\CircleObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
