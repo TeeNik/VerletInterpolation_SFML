@@ -8,7 +8,7 @@ public:
 	CircleObject();
 
 	void Update(float DeltaTime);
-	void Render();
+	void Render(sf::RenderWindow& window);
 
 protected:
 	sf::CircleShape Shape;

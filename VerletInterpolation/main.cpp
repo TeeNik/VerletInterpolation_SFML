@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Objects/CircleObject.h"
 
 int main()
 {
@@ -7,14 +8,16 @@ int main()
     settings.antialiasingLevel = 8;
 
     sf::RenderWindow window(sf::VideoMode(960, 720), "SFML Application", sf::Style::Default, settings);
+
+    CircleObject co;
     
     window.setFramerateLimit(30);
     sf::Clock clock;
 
-    sf::CircleShape shape;
-    shape.setRadius(80.f);
-    shape.setPosition(100.f, 100.f);
-    shape.setFillColor(sf::Color::Blue);
+    //sf::CircleShape shape;
+    //shape.setRadius(80.f);
+    //shape.setPosition(100.f, 100.f);
+    //shape.setFillColor(sf::Color::Blue);
 
     while (window.isOpen()) {
 
@@ -29,7 +32,10 @@ int main()
         clock.restart();
 
         window.clear();
-        window.draw(shape);
+
+        co.Render(window);
+
+        //window.draw(shape);
         window.display();
     }
 
