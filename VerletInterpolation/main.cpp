@@ -11,7 +11,9 @@ int main()
 
     CircleObject co;
     
+
     window.setFramerateLimit(30);
+    const float deltaTimeLimit = 1.0f / 30;
     sf::Clock clock;
 
     //sf::CircleShape shape;
@@ -28,11 +30,17 @@ int main()
                 window.close();
         }
 
-        const float deltaTime = clock.getElapsedTime().asMilliseconds();
+        float deltaTime = clock.getElapsedTime().asSeconds();
+        if (deltaTime > deltaTimeLimit)
+        {
+            deltaTime = deltaTimeLimit;
+        }
+
         clock.restart();
 
         window.clear();
 
+        co.Update(deltaTime);
         co.Render(window);
 
         //window.draw(shape);
