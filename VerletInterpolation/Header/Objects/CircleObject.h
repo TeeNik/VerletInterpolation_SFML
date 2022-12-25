@@ -9,19 +9,29 @@ struct Vector2
 	Vector2() : x(0), y(0) {}
 	Vector2(float xValue, float yValue) : x(xValue), y(yValue) {}
 
-	Vector2 operator+(const Vector2& a)
+	Vector2 operator+(const Vector2& a) const
 	{
 		return Vector2(x + a.x, y + a.y);
 	}
 
-	Vector2 operator-(const Vector2& a)
+	Vector2 operator-(const Vector2& a) const
 	{
 		return Vector2(x - a.x, y - a.y);
 	}
 
-	Vector2 operator*(float a)
+	Vector2 operator*(float a) const
 	{
 		return Vector2(x * a, y * a);
+	}
+
+	Vector2 operator/(float a) const
+	{
+		return Vector2(x / a, y / a);
+	}
+
+	float length() const
+	{
+		return std::sqrt(x * x + y * y);
 	}
 };
 
@@ -34,7 +44,6 @@ public:
 	void Update(float deltaTime);
 	void Render(sf::RenderWindow& window);
 
-	void Accelerate(Vector2 acc);
 
 protected:
 	sf::CircleShape shape;
@@ -42,5 +51,8 @@ protected:
 	Vector2 position_currect;
 	Vector2 position_old;
 	Vector2 acceleration;
+
+	void Accelerate(Vector2 acc);
+	void ApplyConstraints();
 
 };
