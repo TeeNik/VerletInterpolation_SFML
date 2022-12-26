@@ -18,7 +18,7 @@ void CircleObject::Update(float deltaTime)
 {
 	const Vector2 gravity(0, 10);
 	Accelerate(gravity);
-	//ApplyConstraints();
+	ApplyConstraints();
 	
 	const Vector2 velocity = position_currect - position_old;
 	position_old = position_currect;
@@ -28,6 +28,14 @@ void CircleObject::Update(float deltaTime)
 
 void CircleObject::Render(sf::RenderWindow& window)
 {
+	sf::CircleShape back;
+	back.setFillColor(sf::Color::White);
+	back.setRadius(320);
+	back.setPosition(480, 360);
+	back.setOrigin(320, 320);
+	back.setPointCount(128);
+	window.draw(back);
+
 	shape.setPosition(position_currect.x, position_currect.y);
 	window.draw(shape);
 }
@@ -39,8 +47,8 @@ void CircleObject::Accelerate(Vector2 acc)
 
 void CircleObject::ApplyConstraints()
 {
-	const Vector2 position(800, 450);
-	const float radius = 400;
+	const Vector2 position(480, 360);
+	const float radius = 320;
 
 	const Vector2 toObj = position_currect - position;
 	const float dist = toObj.length();
