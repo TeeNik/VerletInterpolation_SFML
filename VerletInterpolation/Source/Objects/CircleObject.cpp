@@ -1,12 +1,13 @@
 #include "Objects/CircleObject.h"
+#include <iostream>
 
 CircleObject::CircleObject()
 {
 	shape.setRadius(50.f);
 	shape.setPosition(100.f, 100.f);
 	shape.setFillColor(sf::Color::Blue);
-	shape.setOutlineThickness(10.f);
-	shape.setOutlineColor(sf::Color(250, 150, 100));
+	//shape.setOutlineThickness(10.f);
+	//shape.setOutlineColor(sf::Color(250, 150, 100));
 
 	position_currect = {480,180};
 	position_old = { 480,180 };
@@ -16,13 +17,15 @@ CircleObject::CircleObject()
 
 void CircleObject::Update(float deltaTime)
 {
-	const Vector2 gravity(0, 10);
+	const Vector2 gravity(0, 1000);
 	Accelerate(gravity);
 	ApplyConstraints();
 	
 	const Vector2 velocity = position_currect - position_old;
+	std::cout << position_currect.x << "  " << position_currect.y << "  " << velocity.y << std::endl;
 	position_old = position_currect;
-	position_currect = position_currect + velocity + acceleration * deltaTime * deltaTime;
+	const Vector2 acc = acceleration * deltaTime * deltaTime;
+	position_currect = position_currect + velocity + acc;
 	acceleration = Vector2{0,0};
 }
 
@@ -50,11 +53,11 @@ void CircleObject::ApplyConstraints()
 	const Vector2 position(480, 360);
 	const float radius = 320;
 
-	const Vector2 toObj = position_currect - position;
+	const Vector2 toObj = position - position_currect;
 	const float dist = toObj.length();
 	if (dist > radius - 50.0f)
 	{
 		const Vector2 n = toObj / dist;
-		position_currect = position + n * (dist - 50.0f);
+		position_currect = position - n * (radius - 50.0f);
 	}
 }
