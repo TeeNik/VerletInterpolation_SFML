@@ -12,8 +12,9 @@ int main()
     CircleObject co;
     
 
-    window.setFramerateLimit(30);
-    const float deltaTimeLimit = 1.0f / 30;
+    const int FPS = 60;
+    window.setFramerateLimit(FPS);
+    const float deltaTimeLimit = 1.0f / FPS;
     sf::Clock clock;
 
     //sf::CircleShape shape;
