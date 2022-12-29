@@ -1,4 +1,4 @@
-#include "Objects/CircleObject.h"
+#include "Verlet/CircleObject.h"
 #include <iostream>
 
 CircleObject::CircleObject()
@@ -9,8 +9,8 @@ CircleObject::CircleObject()
 	//shape.setOutlineThickness(10.f);
 	//shape.setOutlineColor(sf::Color(250, 150, 100));
 
-	position_currect = {480,180};
-	position_old = { 480,180 };
+	position_currect = {650,180};
+	position_old = { 650,180 };
 
 	shape.setOrigin(50, 50);
 }

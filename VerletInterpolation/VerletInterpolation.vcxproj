@@ -142,10 +142,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Source\Objects\CircleObject.cpp" />
+    <ClCompile Include="Source\Verlet\CircleObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header\Objects\CircleObject.h" />
+    <ClInclude Include="Header\Verlet\CircleObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
