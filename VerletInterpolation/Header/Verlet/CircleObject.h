@@ -40,15 +40,20 @@ class CircleObject
 
 public:
 	CircleObject();
+	CircleObject(const CircleObject& co);
 
 	void Update(float deltaTime);
 	void Render(sf::RenderWindow& window);
 
+	static int count;
+	int id;
+
+	float radius = 50.0f;
+	Vector2 position_currect;
 
 protected:
 	sf::CircleShape shape;
 
-	Vector2 position_currect;
 	Vector2 position_old;
 	Vector2 acceleration;
 

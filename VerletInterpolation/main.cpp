@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Verlet/CircleObject.h"
+#include "Verlet/VerletSolver.h"
 
 int main()
 {
@@ -9,18 +9,13 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(960, 720), "SFML Application", sf::Style::Default, settings);
 
-    CircleObject co;
-    
+    VerletSolver vs;
+    vs.Start();
 
     const int FPS = 60;
     window.setFramerateLimit(FPS);
     const float deltaTimeLimit = 1.0f / FPS;
     sf::Clock clock;
-
-    //sf::CircleShape shape;
-    //shape.setRadius(80.f);
-    //shape.setPosition(100.f, 100.f);
-    //shape.setFillColor(sf::Color::Blue);
 
     while (window.isOpen()) {
 
@@ -41,10 +36,9 @@ int main()
 
         window.clear();
 
-        co.Update(deltaTime);
-        co.Render(window);
+        vs.Update(deltaTime);
+        vs.Render(window);
 
-        //window.draw(shape);
         window.display();
     }
 
