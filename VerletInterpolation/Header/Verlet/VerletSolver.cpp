@@ -7,11 +7,17 @@ VerletSolver::VerletSolver()
 void VerletSolver::Start()
 {
 	objects.resize(numOfObjects);
+
+	for (int i = 0; i < numOfObjects; ++i)
+	{
+
+	}
+
 }
 
 void VerletSolver::Update(float deltaTime)
 {
-	//SolveCollisions();
+	SolveCollisions();
 
 	for (CircleObject& obj : objects)
 	{
@@ -43,7 +49,7 @@ void VerletSolver::SolveCollisions()
 	for (int i = 0; i < objects.size(); ++i)
 	{
 		CircleObject& co1 = objects[i];
-		for (int j = 0; j < objects.size(); ++j)
+		for (int j = i + 1; j < objects.size(); ++j)
 		{
 			CircleObject& co2 = objects[j];
 

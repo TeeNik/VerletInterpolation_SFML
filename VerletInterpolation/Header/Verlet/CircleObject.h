@@ -41,12 +41,10 @@ class CircleObject
 public:
 	CircleObject();
 	CircleObject(const CircleObject& co);
+	CircleObject(const Vector2& initialPosition);
 
 	void Update(float deltaTime);
 	void Render(sf::RenderWindow& window);
-
-	static int count;
-	int id;
 
 	float radius = 50.0f;
 	Vector2 position_currect;

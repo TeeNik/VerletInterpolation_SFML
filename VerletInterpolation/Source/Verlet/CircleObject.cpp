@@ -3,8 +3,8 @@
 
 CircleObject::CircleObject()
 {
-	shape.setRadius(50.f);
-	shape.setPosition(100.f, 100.f);
+	shape.setRadius(radius);
+	shape.setOrigin(radius, radius);
 	shape.setFillColor(sf::Color::Blue);
 	//shape.setOutlineThickness(10.f);
 	//shape.setOutlineColor(sf::Color(250, 150, 100));
@@ -12,7 +12,25 @@ CircleObject::CircleObject()
 	position_currect = {650,180};
 	position_old = { 650,180 };
 
-	shape.setOrigin(50, 50);
+
+	std::cout << "CircleObject constructor\n";
+}
+
+CircleObject::CircleObject(const CircleObject& co)
+{
+	shape = co.shape;
+	position_currect = co.position_currect;
+	position_old = co.position_old;
+	std::cout << "CircleObject copy constructor\n";
+}
+
+CircleObject::CircleObject(const Vector2& initialPosition) : 
+	position_currect(initialPosition),
+	position_old(initialPosition)
+{
+	shape.setRadius(radius);
+	shape.setOrigin(radius, radius);
+	shape.setFillColor(sf::Color::Blue);
 }
 
 void CircleObject::Update(float deltaTime)
@@ -22,7 +40,7 @@ void CircleObject::Update(float deltaTime)
 	ApplyConstraints();
 	
 	const Vector2 velocity = position_currect - position_old;
-	std::cout << position_currect.x << "  " << position_currect.y << "  " << velocity.y << std::endl;
+	//std::cout << position_currect.x << "  " << position_currect.y << "  " << velocity.y << std::endl;
 	position_old = position_currect;
 	const Vector2 acc = acceleration * deltaTime * deltaTime;
 	position_currect = position_currect + velocity + acc;
@@ -31,14 +49,6 @@ void CircleObject::Update(float deltaTime)
 
 void CircleObject::Render(sf::RenderWindow& window)
 {
-	sf::CircleShape back;
-	back.setFillColor(sf::Color::White);
-	back.setRadius(320);
-	back.setPosition(480, 360);
-	back.setOrigin(320, 320);
-	back.setPointCount(128);
-	window.draw(back);
-
 	shape.setPosition(position_currect.x, position_currect.y);
 	window.draw(shape);
 }
@@ -51,13 +61,13 @@ void CircleObject::Accelerate(Vector2 acc)
 void CircleObject::ApplyConstraints()
 {
 	const Vector2 position(480, 360);
-	const float radius = 320;
+	const float constraintRadius = 320;
 
 	const Vector2 toObj = position - position_currect;
 	const float dist = toObj.length();
-	if (dist > radius - 50.0f)
+	if (dist > constraintRadius - 50.0f)
 	{
 		const Vector2 n = toObj / dist;
-		position_currect = position - n * (radius - 50.0f);
+		position_currect = position - n * (constraintRadius - radius);
 	}
 }
