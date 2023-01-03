@@ -12,12 +12,16 @@ public:
 	void Render(sf::RenderWindow& window);
 
 protected:
+	void ApplyGravity();
 	void ApplyConstraints();
 	void SolveCollisions();
+	void UpdateObjects(float deltaTime);
+
+	float RandRange(float min, float max);
 
 	std::vector<CircleObject> objects;
 	sf::CircleShape background;
 
-	int numOfObjects = 1;
+	int numOfObjects = 2;
 
 };

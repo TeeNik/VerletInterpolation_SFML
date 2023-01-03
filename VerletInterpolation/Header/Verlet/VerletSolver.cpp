@@ -6,23 +6,22 @@ VerletSolver::VerletSolver()
 
 void VerletSolver::Start()
 {
-	objects.resize(numOfObjects);
+	objects.reserve(numOfObjects);
 
 	for (int i = 0; i < numOfObjects; ++i)
 	{
-
+		const Vector2 pos(RandRange(300, 600), 180);
+		objects.emplace_back(pos);
 	}
 
 }
 
 void VerletSolver::Update(float deltaTime)
 {
+	ApplyGravity();
+	ApplyConstraints();
 	SolveCollisions();
-
-	for (CircleObject& obj : objects)
-	{
-		obj.Update(deltaTime);
-	}
+	UpdateObjects(deltaTime);
 }
 
 void VerletSolver::Render(sf::RenderWindow& window)
@@ -40,8 +39,29 @@ void VerletSolver::Render(sf::RenderWindow& window)
 	}
 }
 
+void VerletSolver::ApplyGravity()
+{
+	for (CircleObject& obj : objects)
+	{
+		obj.Accelerate(Vector2(0, 1000));
+	}
+}
+
 void VerletSolver::ApplyConstraints()
 {
+	for (CircleObject& obj : objects)
+	{
+		const Vector2 position(480, 360);
+		const float constraintRadius = 320;
+
+		const Vector2 toObj = position - obj.position_currect;
+		const float dist = toObj.length();
+		if (dist > constraintRadius - 50.0f)
+		{
+			const Vector2 n = toObj / dist;
+			obj.position_currect = position - n * (constraintRadius - obj.radius);
+		}
+	}
 }
 
 void VerletSolver::SolveCollisions()
@@ -61,8 +81,21 @@ void VerletSolver::SolveCollisions()
 				const Vector2 n = diff / dist;
 				const float delta = sumRad - dist;
 				co1.position_currect = co1.position_currect + n * 0.5f * delta;
-				co2.position_currect = co2.position_currect + n * 0.5f * delta;
+				co2.position_currect = co2.position_currect - n * 0.5f * delta;
 			}
 		}
 	}
+}
+
+void VerletSolver::UpdateObjects(float deltaTime)
+{
+	for (CircleObject& obj : objects)
+	{
+		obj.Update(deltaTime);
+	}
+}
+
+float VerletSolver::RandRange(float min, float max)
+{
+	return min + static_cast<float>(rand()) * static_cast<float>(max - min) / RAND_MAX;
 }
