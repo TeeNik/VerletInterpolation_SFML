@@ -36,8 +36,8 @@ CircleObject::CircleObject(const Vector2& initialPosition) :
 void CircleObject::Update(float deltaTime)
 {
 	const Vector2 gravity(0, 1000);
-	Accelerate(gravity);
-	ApplyConstraints();
+	//Accelerate(gravity);
+	//ApplyConstraints();
 	
 	const Vector2 velocity = position_currect - position_old;
 	//std::cout << position_currect.x << "  " << position_currect.y << "  " << velocity.y << std::endl;

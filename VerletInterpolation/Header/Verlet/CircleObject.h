@@ -45,6 +45,8 @@ public:
 
 	void Update(float deltaTime);
 	void Render(sf::RenderWindow& window);
+	void Accelerate(Vector2 acc);
+	void ApplyConstraints();
 
 	float radius = 50.0f;
 	Vector2 position_currect;
@@ -55,7 +57,5 @@ protected:
 	Vector2 position_old;
 	Vector2 acceleration;
 
-	void Accelerate(Vector2 acc);
-	void ApplyConstraints();
 
 };
