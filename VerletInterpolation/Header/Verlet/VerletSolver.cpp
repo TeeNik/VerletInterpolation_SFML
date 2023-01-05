@@ -11,17 +11,24 @@ void VerletSolver::Start()
 	for (int i = 0; i < numOfObjects; ++i)
 	{
 		const Vector2 pos(RandRange(300, 600), 180);
-		objects.emplace_back(pos);
+		const float radius = RandRange(10, 50);
+		objects.emplace_back(pos, sf::Color::Blue, radius);
 	}
 
 }
 
 void VerletSolver::Update(float deltaTime)
 {
-	ApplyGravity();
-	ApplyConstraints();
-	SolveCollisions();
-	UpdateObjects(deltaTime);
+	const int subSteps = 8;
+	const float subDeltaTime = deltaTime / subSteps;
+
+	for (int i = 0; i < subSteps; ++i)
+	{
+		ApplyGravity();
+		ApplyConstraints();
+		SolveCollisions();
+		UpdateObjects(subDeltaTime);
+	}
 }
 
 void VerletSolver::Render(sf::RenderWindow& window)
@@ -41,9 +48,10 @@ void VerletSolver::Render(sf::RenderWindow& window)
 
 void VerletSolver::ApplyGravity()
 {
+	const Vector2 gravity(0, 1000);
 	for (CircleObject& obj : objects)
 	{
-		obj.Accelerate(Vector2(0, 1000));
+		obj.Accelerate(gravity);
 	}
 }
 

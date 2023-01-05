@@ -22,6 +22,6 @@ protected:
 	std::vector<CircleObject> objects;
 	sf::CircleShape background;
 
-	int numOfObjects = 2;
+	int numOfObjects = 8;
 
 };
