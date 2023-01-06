@@ -1,4 +1,5 @@
-#include "VerletSolver.h"
+#include "Verlet/VerletSolver.h"
+#include "Verlet/Utils.h"
 
 VerletSolver::VerletSolver()
 {
@@ -6,27 +7,35 @@ VerletSolver::VerletSolver()
 
 void VerletSolver::Start()
 {
-	objects.reserve(numOfObjects);
+	//objects.reserve(numOfObjects);
+	//
+	//for (int i = 0; i < numOfObjects; ++i)
+	//{
+	//	const Vector2 pos(Utils::RandRange(300, 600), 180);
+	//	const float radius = Utils::RandRange(10, 50);
+	//	objects.emplace_back(pos, Utils::GetRandomColor(i), radius);
+	//}
 
-	for (int i = 0; i < numOfObjects; ++i)
-	{
-		const Vector2 pos(RandRange(300, 600), 180);
-		const float radius = RandRange(10, 50);
-		objects.emplace_back(pos, sf::Color::Blue, radius);
-	}
+}
 
+void VerletSolver::SpawnObject()
+{
+	const Vector2 pos(500, 180);
+	const float radius = Utils::RandRange(10, 50);
+	objects.emplace_back(pos, Utils::GetRandomColor(time), radius);
 }
 
 void VerletSolver::Update(float deltaTime)
 {
+	time += deltaTime;
 	const int subSteps = 8;
 	const float subDeltaTime = deltaTime / subSteps;
 
 	for (int i = 0; i < subSteps; ++i)
 	{
 		ApplyGravity();
-		ApplyConstraints();
 		SolveCollisions();
+		ApplyConstraints();
 		UpdateObjects(subDeltaTime);
 	}
 }
@@ -64,7 +73,7 @@ void VerletSolver::ApplyConstraints()
 
 		const Vector2 toObj = position - obj.position_currect;
 		const float dist = toObj.length();
-		if (dist > constraintRadius - 50.0f)
+		if (dist > constraintRadius - obj.radius)
 		{
 			const Vector2 n = toObj / dist;
 			obj.position_currect = position - n * (constraintRadius - obj.radius);
@@ -74,6 +83,8 @@ void VerletSolver::ApplyConstraints()
 
 void VerletSolver::SolveCollisions()
 {
+	const float responseCoef = 0.75f;
+
 	for (int i = 0; i < objects.size(); ++i)
 	{
 		CircleObject& co1 = objects[i];
@@ -87,9 +98,13 @@ void VerletSolver::SolveCollisions()
 			if (dist < sumRad)
 			{
 				const Vector2 n = diff / dist;
-				const float delta = sumRad - dist;
-				co1.position_currect = co1.position_currect + n * 0.5f * delta;
-				co2.position_currect = co2.position_currect - n * 0.5f * delta;
+				const float delta = 0.5f * responseCoef * (dist - sumRad);
+
+				const float massRatio1 = co1.radius / (co1.radius + co2.radius);
+				const float massRatio2 = co2.radius / (co1.radius + co2.radius);
+
+				co1.position_currect = co1.position_currect - n * massRatio2 * delta;
+				co2.position_currect = co2.position_currect + n * massRatio1 * delta;
 			}
 		}
 	}
@@ -101,9 +116,4 @@ void VerletSolver::UpdateObjects(float deltaTime)
 	{
 		obj.Update(deltaTime);
 	}
-}
-
-float VerletSolver::RandRange(float min, float max)
-{
-	return min + static_cast<float>(rand()) * static_cast<float>(max - min) / RAND_MAX;
 }
