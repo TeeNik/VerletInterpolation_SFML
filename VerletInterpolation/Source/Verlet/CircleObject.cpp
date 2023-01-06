@@ -24,26 +24,22 @@ CircleObject::CircleObject(const CircleObject& co)
 	std::cout << "CircleObject copy constructor\n";
 }
 
-CircleObject::CircleObject(const Vector2& initialPosition) : 
+CircleObject::CircleObject(const Vector2& initialPosition, const sf::Color color, float radius) :
 	position_currect(initialPosition),
 	position_old(initialPosition)
 {
+	this->radius = radius;
 	shape.setRadius(radius);
 	shape.setOrigin(radius, radius);
-	shape.setFillColor(sf::Color::Blue);
+	shape.setFillColor(color);
 }
 
 void CircleObject::Update(float deltaTime)
 {
-	const Vector2 gravity(0, 1000);
-	//Accelerate(gravity);
-	//ApplyConstraints();
-	
 	const Vector2 velocity = position_currect - position_old;
 	//std::cout << position_currect.x << "  " << position_currect.y << "  " << velocity.y << std::endl;
 	position_old = position_currect;
-	const Vector2 acc = acceleration * deltaTime * deltaTime;
-	position_currect = position_currect + velocity + acc;
+	position_currect = position_currect + velocity + acceleration * deltaTime * deltaTime;
 	acceleration = Vector2{0,0};
 }
 
@@ -56,18 +52,4 @@ void CircleObject::Render(sf::RenderWindow& window)
 void CircleObject::Accelerate(Vector2 acc)
 {
 	acceleration = acceleration + acc;
-}
-
-void CircleObject::ApplyConstraints()
-{
-	const Vector2 position(480, 360);
-	const float constraintRadius = 320;
-
-	const Vector2 toObj = position - position_currect;
-	const float dist = toObj.length();
-	if (dist > constraintRadius - 50.0f)
-	{
-		const Vector2 n = toObj / dist;
-		position_currect = position - n * (constraintRadius - radius);
-	}
 }

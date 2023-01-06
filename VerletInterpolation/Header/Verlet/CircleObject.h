@@ -41,12 +41,11 @@ class CircleObject
 public:
 	CircleObject();
 	CircleObject(const CircleObject& co);
-	CircleObject(const Vector2& initialPosition);
+	CircleObject(const Vector2& initialPosition, const sf::Color color, float radius);
 
 	void Update(float deltaTime);
 	void Render(sf::RenderWindow& window);
 	void Accelerate(Vector2 acc);
-	void ApplyConstraints();
 
 	float radius = 50.0f;
 	Vector2 position_currect;
