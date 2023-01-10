@@ -1,21 +1,20 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Verlet/VerletSolver.h"
+#include "Verlet/Level.h"
 
 int main()
 {
+    srand(time(NULL));
     sf::ContextSettings settings;
-    settings.antialiasingLevel = 8;
+    settings.antialiasingLevel = 1;
 
     sf::RenderWindow window(sf::VideoMode(960, 720), "SFML Application", sf::Style::Default, settings);
 
-    VerletSolver vs;
-    vs.Start();
+    Level01 level;
 
     const int FPS = 60;
     window.setFramerateLimit(FPS);
-    const float deltaTimeLimit = 1.0f / FPS;
-    sf::Clock clock;
+    const float deltaTime = 1.0f / FPS;
 
     while (window.isOpen()) {
 
@@ -25,19 +24,7 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-
-        float deltaTime = clock.getElapsedTime().asSeconds();
-        if (deltaTime > deltaTimeLimit)
-        {
-            deltaTime = deltaTimeLimit;
-        }
-
-        clock.restart();
-
-        window.clear();
-
-        vs.Update(deltaTime);
-        vs.Render(window);
+        level.Update(deltaTime, window);
 
         window.display();
     }
