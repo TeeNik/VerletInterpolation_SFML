@@ -35,13 +35,13 @@ struct Vector2
 	}
 };
 
-class CircleObject
+class VerletObject
 {
 
 public:
-	CircleObject();
-	CircleObject(const CircleObject& co);
-	CircleObject(const Vector2& initialPosition, const sf::Color color, float radius);
+	VerletObject();
+	//CircleObject(const CircleObject& co);
+	VerletObject(const Vector2& initialPosition, sf::Color color, float radius);
 
 	void Update(float deltaTime);
 	void Render(sf::RenderWindow& window);
@@ -55,6 +55,4 @@ protected:
 
 	Vector2 position_old;
 	Vector2 acceleration;
-
-
 };

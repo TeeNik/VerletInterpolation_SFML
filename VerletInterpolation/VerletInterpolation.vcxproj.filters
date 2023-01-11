@@ -18,7 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Verlet\CircleObject.cpp">
+    <ClCompile Include="Source\Verlet\VerletObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Verlet\Utils.cpp">
@@ -35,7 +35,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header\Verlet\CircleObject.h">
+    <ClInclude Include="Header\Verlet\VerletObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Header\Verlet\VerletSolver.h">

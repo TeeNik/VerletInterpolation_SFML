@@ -1,7 +1,8 @@
-#include "Verlet/CircleObject.h"
+#include "Verlet/VerletObject.h"
 #include <iostream>
+#include "Verlet/Utils.h"
 
-CircleObject::CircleObject()
+VerletObject::VerletObject()
 {
 	shape.setRadius(radius);
 	shape.setOrigin(radius, radius);
@@ -13,18 +14,18 @@ CircleObject::CircleObject()
 	position_old = { 650,180 };
 
 
-	std::cout << "CircleObject constructor\n";
+	std::cout << "VerletObject constructor\n";
 }
 
-CircleObject::CircleObject(const CircleObject& co)
-{
-	shape = co.shape;
-	position_currect = co.position_currect;
-	position_old = co.position_old;
-	std::cout << "CircleObject copy constructor\n";
-}
+//CircleObject::CircleObject(const CircleObject& co)
+//{
+//	shape = co.shape;
+//	position_currect = co.position_currect;
+//	position_old = co.position_old;
+//	std::cout << "CircleObject copy constructor\n";
+//}
 
-CircleObject::CircleObject(const Vector2& initialPosition, const sf::Color color, float radius) :
+VerletObject::VerletObject(const Vector2& initialPosition, sf::Color color, float radius) :
 	position_currect(initialPosition),
 	position_old(initialPosition)
 {
@@ -34,7 +35,7 @@ CircleObject::CircleObject(const Vector2& initialPosition, const sf::Color color
 	shape.setFillColor(color);
 }
 
-void CircleObject::Update(float deltaTime)
+void VerletObject::Update(float deltaTime)
 {
 	const Vector2 velocity = position_currect - position_old;
 	//std::cout << position_currect.x << "  " << position_currect.y << "  " << velocity.y << std::endl;
@@ -43,13 +44,13 @@ void CircleObject::Update(float deltaTime)
 	acceleration = Vector2{0,0};
 }
 
-void CircleObject::Render(sf::RenderWindow& window)
+void VerletObject::Render(sf::RenderWindow& window)
 {
 	shape.setPosition(position_currect.x, position_currect.y);
 	window.draw(shape);
 }
 
-void CircleObject::Accelerate(Vector2 acc)
+void VerletObject::Accelerate(Vector2 acc)
 {
 	acceleration = acceleration + acc;
 }

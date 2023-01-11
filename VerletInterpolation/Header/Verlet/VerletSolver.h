@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "Verlet/CircleObject.h"
+#include "Verlet/VerletObject.h"
 
 class VerletSolver
 {
@@ -18,7 +18,7 @@ protected:
 	void SolveCollisions();
 	void UpdateObjects(float deltaTime);
 
-	std::vector<CircleObject> objects;
+	std::vector<VerletObject> objects;
 	sf::CircleShape background;
 
 	int numOfObjects = 8;

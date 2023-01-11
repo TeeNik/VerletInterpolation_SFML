@@ -49,7 +49,7 @@ void VerletSolver::Render(sf::RenderWindow& window)
 	background.setPointCount(128);
 	window.draw(background);
 
-	for (CircleObject& obj : objects)
+	for (VerletObject& obj : objects)
 	{
 		obj.Render(window);
 	}
@@ -58,7 +58,7 @@ void VerletSolver::Render(sf::RenderWindow& window)
 void VerletSolver::ApplyGravity()
 {
 	const Vector2 gravity(0, 1000);
-	for (CircleObject& obj : objects)
+	for (VerletObject& obj : objects)
 	{
 		obj.Accelerate(gravity);
 	}
@@ -66,7 +66,7 @@ void VerletSolver::ApplyGravity()
 
 void VerletSolver::ApplyConstraints()
 {
-	for (CircleObject& obj : objects)
+	for (VerletObject& obj : objects)
 	{
 		const Vector2 position(480, 360);
 		const float constraintRadius = 320;
@@ -87,10 +87,10 @@ void VerletSolver::SolveCollisions()
 
 	for (int i = 0; i < objects.size(); ++i)
 	{
-		CircleObject& co1 = objects[i];
+		VerletObject& co1 = objects[i];
 		for (int j = i + 1; j < objects.size(); ++j)
 		{
-			CircleObject& co2 = objects[j];
+			VerletObject& co2 = objects[j];
 
 			const Vector2 diff = co1.position_currect - co2.position_currect;
 			const float dist = diff.length();
@@ -112,7 +112,7 @@ void VerletSolver::SolveCollisions()
 
 void VerletSolver::UpdateObjects(float deltaTime)
 {
-	for (CircleObject& obj : objects)
+	for (VerletObject& obj : objects)
 	{
 		obj.Update(deltaTime);
 	}
