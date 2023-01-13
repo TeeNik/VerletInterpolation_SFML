@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "Verlet/VerletObject.h"
+#include "Verlet/Constraint.h"
 
 class VerletSolver
 {
@@ -20,6 +21,9 @@ protected:
 
 	std::vector<VerletObject> objects;
 	sf::CircleShape background;
+	
+	//CircleConstraint CircleConstraint;
+	RectConstraint Constraint;
 
 	int numOfObjects = 8;
 	float time = 0;

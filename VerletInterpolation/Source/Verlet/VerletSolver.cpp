@@ -1,7 +1,7 @@
 #include "Verlet/VerletSolver.h"
 #include "Verlet/Utils.h"
 
-VerletSolver::VerletSolver()
+VerletSolver::VerletSolver() //: CircleConstraint(Vector2(480, 360), 320)
 {
 }
 
@@ -68,16 +68,7 @@ void VerletSolver::ApplyConstraints()
 {
 	for (VerletObject& obj : objects)
 	{
-		const Vector2 position(480, 360);
-		const float constraintRadius = 320;
-
-		const Vector2 toObj = position - obj.position_currect;
-		const float dist = toObj.length();
-		if (dist > constraintRadius - obj.radius)
-		{
-			const Vector2 n = toObj / dist;
-			obj.position_currect = position - n * (constraintRadius - obj.radius);
-		}
+		Constraint.ApplyConstraint(obj);
 	}
 }
 
