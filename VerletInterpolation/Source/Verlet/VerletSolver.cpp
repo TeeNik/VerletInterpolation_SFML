@@ -18,11 +18,12 @@ void VerletSolver::Start()
 
 }
 
-void VerletSolver::SpawnObject()
+VerletObject& VerletSolver::SpawnObject()
 {
 	const Vector2 pos(500, 180);
 	const float radius = Utils::RandRange(10, 50);
 	objects.emplace_back(pos, Utils::GetRandomColor(time), radius);
+	return objects.back();
 }
 
 void VerletSolver::Update(float deltaTime)

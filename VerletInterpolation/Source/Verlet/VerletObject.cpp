@@ -13,7 +13,6 @@ VerletObject::VerletObject()
 	position_currect = {650,180};
 	position_old = { 650,180 };
 
-
 	std::cout << "VerletObject constructor\n";
 }
 
@@ -53,4 +52,9 @@ void VerletObject::Render(sf::RenderWindow& window)
 void VerletObject::Accelerate(Vector2 acc)
 {
 	acceleration = acceleration + acc;
+}
+
+void VerletObject::SetVelocity(Vector2 velocity, float deltaTime)
+{
+	position_old = position_currect - (velocity * deltaTime);
 }

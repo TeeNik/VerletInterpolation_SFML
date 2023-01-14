@@ -43,7 +43,7 @@ void RectConstraint::ApplyConstraint(VerletObject& object)
 	else if (max.x < objPos.x + objRad)
 	{
 		const float dist = max.x - objPos.x;
-		object.position_currect.x = objPos.x - objRad;
+		object.position_currect.x -= objRad - dist;
 	}
 	if (min.y > objPos.y - objRad)
 	{

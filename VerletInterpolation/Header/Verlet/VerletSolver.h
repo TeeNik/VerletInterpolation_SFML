@@ -9,7 +9,7 @@ public:
 	VerletSolver();
 
 	void Start();
-	void SpawnObject();
+	VerletObject& SpawnObject();
 	void Update(float deltaTime);
 	void Render(sf::RenderWindow& window);
 	
