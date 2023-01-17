@@ -32,6 +32,13 @@ VerletObject::VerletObject(const Vector2& initialPosition, sf::Color color, floa
 	shape.setRadius(radius);
 	shape.setOrigin(radius, radius);
 	shape.setFillColor(color);
+
+	std::cout << "VerletObject constructor\n";
+}
+
+VerletObject::~VerletObject()
+{
+	std::cout << "VerletObject destructor\n";
 }
 
 void VerletObject::Update(float deltaTime)

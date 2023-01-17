@@ -9,6 +9,7 @@ public:
 	VerletObject();
 	//CircleObject(const CircleObject& co);
 	VerletObject(const Vector2& initialPosition, sf::Color color, float radius);
+	~VerletObject();
 
 	void Update(float deltaTime);
 	void Render(sf::RenderWindow& window);
