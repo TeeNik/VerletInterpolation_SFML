@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Source\Verlet\Constraint.cpp" />
+    <ClCompile Include="Source\Verlet\Input.cpp" />
     <ClCompile Include="Source\Verlet\Math.cpp" />
     <ClCompile Include="Source\Verlet\VerletObject.cpp" />
     <ClCompile Include="Source\Verlet\Level.cpp" />
@@ -152,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\Verlet\Constraint.h" />
+    <ClInclude Include="Header\Verlet\Input.h" />
     <ClInclude Include="Header\Verlet\Math.h" />
     <ClInclude Include="Header\Verlet\VerletObject.h" />
     <ClInclude Include="Header\Verlet\Level.h" />
