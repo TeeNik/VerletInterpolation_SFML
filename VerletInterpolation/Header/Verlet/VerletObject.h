@@ -14,6 +14,8 @@ public:
 	void Update(float deltaTime);
 	void Render(sf::RenderWindow& window);
 	void Accelerate(Vector2 acc);
+	
+	Vector2 GetVelocity(float deltaTime) const;
 	void SetVelocity(Vector2 velocity, float deltaTime);
 
 	float radius = 50.0f;

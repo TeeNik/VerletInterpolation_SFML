@@ -61,6 +61,11 @@ void VerletObject::Accelerate(Vector2 acc)
 	acceleration = acceleration + acc;
 }
 
+Vector2 VerletObject::GetVelocity(float deltaTime) const
+{
+	return (position_currect - position_old) / deltaTime;
+}
+
 void VerletObject::SetVelocity(Vector2 velocity, float deltaTime)
 {
 	position_old = position_currect - (velocity * deltaTime);
